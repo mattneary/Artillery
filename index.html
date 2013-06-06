@@ -266,8 +266,9 @@ else
 						ctx.closePath();	
 						
 					}, 200);			
-				};
-				poll();
+				} else {
+					window.requestAnimationFrame(poll);
+				}
 			};
 			poll();
 		</script>
