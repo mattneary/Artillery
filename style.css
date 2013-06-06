@@ -1,0 +1,79 @@
+canvas {
+	border: 1px solid #333;
+	background: white;
+	display: block;
+}
+.code, pre, h2 {
+	font-family: "Helvetica Neue", sans-serif;				
+	color: #454545;
+}
+h1 {
+	font-family: 'Lobster';
+	color: #454545;
+	margin: 10px;
+	margin-bottom: 30px;
+	border-bottom: 1px dotted #454545;
+	padding-bottom: 20px;
+	font-size: 50px;
+}			
+.code input[type=text], .code input[type=text]:active {
+	border: 1px solid #333;
+	outline: none;
+	padding: 5px;
+	width: 400px;
+}
+input[type=submit] {
+	background-color: #0c6;
+	padding: 17px 37px;
+	font-size: 19px;
+	line-height: 21px;
+	background-image: -webkit-linear-gradient(top,#0c6,#04b95e);
+	border-color: #00b058;			
+	border: 1px solid #dcdcdc;
+	border-radius: 5px;
+	font-weight: bold;
+	color: white;
+	cursor: pointer;
+}
+.code .tabbed {
+	margin-left: 20px;
+}
+#header {
+	text-align: center;
+}	
+#content {
+	display: block;
+	position: relative;				
+}		
+#wrapper {
+	width: 1100px;
+	position: absolute;
+	left: 50%;
+	padding: 10px;
+	margin-left: -560px;
+	top: 0;
+	background: white;
+}
+body {
+	background: #08c;
+	padding: 0;
+}
+form {
+	position: absolute;
+	top: 0;
+	right: 10px;
+}
+#footer {
+	background: #2b3336;
+	float: left;
+	width: 100%;
+	margin-top: 150px;
+	height: 400px;
+}
+#footer .info {
+	float: left;
+	width: 300px;
+	font-family: 'Helvetica Neue', sans-serif;
+	margin-left: 40px;
+	color: white;
+}
