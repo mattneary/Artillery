@@ -176,10 +176,10 @@ else
 			var interpret = function(x){return eval(parse(x));};
 			
 			var rightPower = function(y1, y2, x1, x2) {
-				return y1-(x1>0?0:x1);
+				return y1;
 			};
 			var leftPower = function(y1, y2, x1, x2) {
-				return y1+(x1>0?x1:0);				
+				return y2;
 			};
 			
 			$("form").on("submit", function(evt) {
