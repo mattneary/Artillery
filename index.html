@@ -194,76 +194,82 @@ else
 				
 			var add = function(a,b){return a+b};
 			var magnitude = function(a,b){return Math.sqrt(a*a + b*b)};
-			setInterval(function() {
-				var pad = navigator.webkitGetGamepads()[0];
-				dx1.push(pad.axes[0]);
-				dy1.push(pad.axes[1]);
-				dx2.push(pad.axes[2]);
-				dy2.push(pad.axes[3]);			
-				
-				cvs.width = cvs.width;
-				
-				var orientation = Math.PI/2;
-				if( dx1.length > 6 && dx2.length > 6 ) {
-					var y1joy = dy1.slice(-2).reduce(add) / 2 * 20;
-					var y2joy = dy2.slice(-2).reduce(add) / 2 * 20;
-					var x1joy = dx1.slice(-2).reduce(add) / 2 * 20;
-					var x2joy = dx2.slice(-2).reduce(add) / 2 * 20;
-					var leftSpeed = leftPower(y1joy, y2joy, x1joy, x2joy);
-					var rightSpeed = rightPower(y1joy, y2joy, x1joy, x2joy);
-					var shared;
-					if( Math.abs(leftSpeed) > Math.abs(rightSpeed) ) {
-						shared = rightSpeed;
-					} else {
-						shared = leftSpeed;
-					}
-					
-					var rotation = Math.PI/8 * (rightSpeed - leftSpeed)/20;
-					var angle = Math.atan((y1-y2)/(x1-x2));		
-					if( x1-x2 < 0 ) {
-						angle = Math.PI + angle;
-					}					
-					
-					orientation = Math.PI/2 - angle;					
-					var separation = magnitude(y1-y2, x1-x2);
-					deltaX = separation*Math.cos(angle-rotation);
-					deltaY = separation*Math.sin(angle-rotation);
-					y2 = y1 - deltaY;
-					x2 = x1 - deltaX;
-					
-					y1 += shared * Math.sin(orientation);
-					y2 += shared * Math.sin(orientation);
-					x1 -= shared * Math.cos(orientation);
-					x2 -= shared * Math.cos(orientation);
-				}
-								
-				ctx.beginPath();
-				var backShift = Math.sin(orientation) * 50;
-				var sideShift = Math.cos(orientation) * 50;
-								
-				ctx.arc(x2, y2, 10, 0, Math.PI*2);
-				ctx.arc(x1, y1, 10, 0, Math.PI*2);
-				ctx.fillStyle = '#f00';
-				ctx.fill();	
-				ctx.closePath();
-				
-				ctx.beginPath();
-				ctx.fillStyle = '#000';
-				ctx.arc(x2-sideShift, y2+backShift, 10, 0, Math.PI*2);
-				ctx.arc(x1-sideShift, y1+backShift, 10, 0, Math.PI*2);
-				ctx.fill();	
-				ctx.closePath();
-				
-				ctx.beginPath();
-				ctx.moveTo(x1, y1);	
-				ctx.lineTo(x1-sideShift, y1+backShift);
-				ctx.lineTo(x2-sideShift, y2+backShift);	
-				ctx.lineTo(x2, y2);	
-				ctx.lineTo(x1, y1);							
-				ctx.stroke();							
-				ctx.closePath();	
-				
-			}, 200);			
+			var poll = function() {
+				if(navigator.webkitGetGamepads()[0]) {
+					setInterval(function() {
+						var pad = navigator.webkitGetGamepads()[0];
+						dx1.push(pad.axes[0]);
+						dy1.push(pad.axes[1]);
+						dx2.push(pad.axes[2]);
+						dy2.push(pad.axes[3]);			
+						
+						cvs.width = cvs.width;
+						
+						var orientation = Math.PI/2;
+						if( dx1.length > 6 && dx2.length > 6 ) {
+							var y1joy = dy1.slice(-2).reduce(add) / 2 * 20;
+							var y2joy = dy2.slice(-2).reduce(add) / 2 * 20;
+							var x1joy = dx1.slice(-2).reduce(add) / 2 * 20;
+							var x2joy = dx2.slice(-2).reduce(add) / 2 * 20;
+							var leftSpeed = leftPower(y1joy, y2joy, x1joy, x2joy);
+							var rightSpeed = rightPower(y1joy, y2joy, x1joy, x2joy);
+							var shared;
+							if( Math.abs(leftSpeed) > Math.abs(rightSpeed) ) {
+								shared = rightSpeed;
+							} else {
+								shared = leftSpeed;
+							}
+							
+							var rotation = Math.PI/8 * (rightSpeed - leftSpeed)/20;
+							var angle = Math.atan((y1-y2)/(x1-x2));		
+							if( x1-x2 < 0 ) {
+								angle = Math.PI + angle;
+							}					
+							
+							orientation = Math.PI/2 - angle;					
+							var separation = magnitude(y1-y2, x1-x2);
+							deltaX = separation*Math.cos(angle-rotation);
+							deltaY = separation*Math.sin(angle-rotation);
+							y2 = y1 - deltaY;
+							x2 = x1 - deltaX;
+							
+							y1 += shared * Math.sin(orientation);
+							y2 += shared * Math.sin(orientation);
+							x1 -= shared * Math.cos(orientation);
+							x2 -= shared * Math.cos(orientation);
+						}
+										
+						ctx.beginPath();
+						var backShift = Math.sin(orientation) * 50;
+						var sideShift = Math.cos(orientation) * 50;
+										
+						ctx.arc(x2, y2, 10, 0, Math.PI*2);
+						ctx.arc(x1, y1, 10, 0, Math.PI*2);
+						ctx.fillStyle = '#f00';
+						ctx.fill();	
+						ctx.closePath();
+						
+						ctx.beginPath();
+						ctx.fillStyle = '#000';
+						ctx.arc(x2-sideShift, y2+backShift, 10, 0, Math.PI*2);
+						ctx.arc(x1-sideShift, y1+backShift, 10, 0, Math.PI*2);
+						ctx.fill();	
+						ctx.closePath();
+						
+						ctx.beginPath();
+						ctx.moveTo(x1, y1);	
+						ctx.lineTo(x1-sideShift, y1+backShift);
+						ctx.lineTo(x2-sideShift, y2+backShift);	
+						ctx.lineTo(x2, y2);	
+						ctx.lineTo(x1, y1);							
+						ctx.stroke();							
+						ctx.closePath();	
+						
+					}, 200);			
+				};
+				poll();
+			};
+			poll();
 		</script>
 	</body>
 </html>
