@@ -81,8 +81,13 @@ var animate = function() {
 		var separation = magnitude(y1-y2, x1-x2);
 		deltaX = separation*Math.cos(angle-rotation);
 		deltaY = separation*Math.sin(angle-rotation);
-		y2 = y1 - deltaY;
-		x2 = x1 - deltaX;
+		if( deltaY > 0 ) {
+			y2 = y1 - deltaY;
+			x2 = x1 - deltaX;
+		} else {
+			y1 = y1 + deltaY;
+			x1 = x1 + deltaX;
+		}
 		
 		y1 += shared * Math.sin(orientation);
 		y2 += shared * Math.sin(orientation);
