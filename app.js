@@ -92,7 +92,7 @@ var animate = function() {
 			deltaY = separation*Math.sin(angle-rotation);
 			y2 = y1 - deltaY;
 			x2 = x1 - deltaX;		
-		} else {
+		} else if( rotation > 0 ) {
 			deltaX = separation*Math.cos(angle+rotation);
 			deltaY = separation*Math.sin(angle+rotation);
 			y1 = y2 - deltaY;
