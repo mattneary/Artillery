@@ -90,7 +90,10 @@ var animate = function() {
 		x2 -= shared * Math.cos(orientation);
 		
 		angle = Math.atan((y1-y2)/(x1-x2));		
-		orientation = Math.PI/2 - angle;
+		if( x1-x2 < 0 ) {
+			angle = Math.PI + angle;
+		}	
+		orientation = Math.PI/2 - angle;		
 	}
 					
 	ctx.beginPath();
