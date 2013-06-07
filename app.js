@@ -79,7 +79,7 @@ var animate = function() {
 		
 		orientation = Math.PI/2 - angle;					
 		var separation = magnitude(y1-y2, x1-x2);		
-		if( deltaY > 0 ) {
+		if( rightSpeed > leftSpeed ) {
 			deltaX = separation*Math.cos(angle-rotation);
 			deltaY = separation*Math.sin(angle-rotation);
 			y2 = y1 - deltaY;
