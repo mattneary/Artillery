@@ -117,14 +117,13 @@ var animate = function() {
 	ctx.lineTo(x2, y2);	
 	ctx.lineTo(x1, y1);							
 	ctx.stroke();							
-	ctx.closePath();
-	window.webkitRequestAnimationFrame(animate);	
+	ctx.closePath();	
 	
 };
 // Wait for Gamepad
 var poll = function() {
 	if(navigator.webkitGetGamepads()[0]) {
-		window.webkitRequestAnimationFrame(animate);			
+		setInterval(animate, 200);			
 	} else {
 		window.requestAnimationFrame(poll);
 	}
