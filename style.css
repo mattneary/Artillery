@@ -22,7 +22,7 @@ h1 {
 	padding: 5px;
 	width: 400px;
 }
-input[type=submit] {
+input[type=submit], input[type=button] {
 	background-color: #0c6;
 	padding: 17px 37px;
 	font-size: 19px;
@@ -34,6 +34,12 @@ input[type=submit] {
 	font-weight: bold;
 	color: white;
 	cursor: pointer;
+}
+input[type=button] {
+	background-color: #c60;
+	border-color: #b05800;	
+	border: 1px solid #dcdcdc;
+	background-image: -webkit-linear-gradient(top,#c60,#b95e04);		
 }
 .code .tabbed {
 	margin-left: 20px;

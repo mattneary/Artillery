@@ -43,6 +43,14 @@ $("form").on("submit", function(evt) {
 	x1 = 225, y1 = 250,
 	x2 = 275, y2 = 250;
 });
+$("#test").on("click", function(evt) {
+	console.log("test");
+	evt.preventDefault();
+	leftPower = interpret($("#left").val());
+	rightPower = interpret($("#right").val());
+	x1 = 225, y1 = 250,
+	x2 = 275, y2 = 250;
+});
 	
 var add = function(a,b){return a+b};
 var magnitude = function(a,b){return Math.sqrt(a*a + b*b)};
