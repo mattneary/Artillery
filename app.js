@@ -84,10 +84,10 @@ var animate = function() {
 		y2 = y1 - deltaY;
 		x2 = x1 - deltaX;		
 		
-		y1 += shared * Math.sin(orientation);
-		y2 += shared * Math.sin(orientation);
-		x1 -= shared * Math.cos(orientation);
-		x2 -= shared * Math.cos(orientation);
+		y1 += shared * Math.sin(orientation) / 20;
+		y2 += shared * Math.sin(orientation) / 20;
+		x1 -= shared * Math.cos(orientation) / 20;
+		x2 -= shared * Math.cos(orientation) / 20;
 	}
 					
 	ctx.beginPath();
@@ -118,12 +118,12 @@ var animate = function() {
 	ctx.lineTo(x1, y1);							
 	ctx.stroke();							
 	ctx.closePath();	
-	
+	window.requestAnimationFrame(animate);	
 };
 // Wait for Gamepad
 var poll = function() {
 	if(navigator.webkitGetGamepads()[0]) {
-		setInterval(animate, 200);			
+		window.requestAnimationFrame(animate);			
 	} else {
 		window.requestAnimationFrame(poll);
 	}
