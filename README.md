@@ -11,7 +11,7 @@ The language in which the joystick logic could be written was constructed to be 
 [leftJoyX>0->leftJoyY,else->leftJoyY-leftJoyX]
 ```
 
-This chosen syntax was inspired by [John McCarthy](http://en.wikipedia.org/wiki/John_McCarthy_(computer_scientist))'s paper [Recursive Functions on Symbolic Expressions](http://www-formal.stanford.edu/jmc/recursive/node3.html). From this syntax for conditions as well as a couple primitive functions he axiomatized the Lisp language to the point of a bootstrapped interpreter.
+This chosen syntax was inspired by [John McCarthy](http://en.wikipedia.org/wiki/John_McCarthy_(computer_scientist)'s paper [Recursive Functions on Symbolic Expressions](http://www-formal.stanford.edu/jmc/recursive/node3.html). From this syntax for conditions as well as a couple primitive functions he axiomatized the Lisp language to the point of a bootstrapped interpreter.
 
 Hypothesis
 ----------
