@@ -35,7 +35,7 @@ input[type=submit], input[type=button] {
 	color: white;
 	cursor: pointer;
 }
-input[type=button] {
+input[type=submit] {
 	background-color: #c60;
 	border-color: #b05800;	
 	border: 1px solid #dcdcdc;

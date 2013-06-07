@@ -35,17 +35,17 @@ var leftPower = function(y1, y2, x1, x2) {
 
 // User Change Functions
 $("form").on("submit", function(evt) {
+	console.log("test");
 	evt.preventDefault();
-	$("pre.left").text(parse($("#left").val()));
-	$("pre.right").text(parse($("#right").val()));
 	leftPower = interpret($("#left").val());
 	rightPower = interpret($("#right").val());
 	x1 = 225, y1 = 250,
 	x2 = 275, y2 = 250;
 });
-$("#test").on("click", function(evt) {
-	console.log("test");
+$("#deploy").on("click", function(evt) {	
 	evt.preventDefault();
+	$("pre.left").text(parse($("#left").val()));
+	$("pre.right").text(parse($("#right").val()));
 	leftPower = interpret($("#left").val());
 	rightPower = interpret($("#right").val());
 	x1 = 225, y1 = 250,
