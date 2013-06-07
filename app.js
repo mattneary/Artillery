@@ -85,8 +85,8 @@ var animate = function() {
 			y2 = y1 - deltaY;
 			x2 = x1 - deltaX;
 		} else {
-			y1 = y1 + deltaY;
-			x1 = x1 + deltaX;
+			y1 = y1 - deltaY;
+			x1 = x1 - deltaX;
 		}
 		
 		y1 += shared * Math.sin(orientation);
