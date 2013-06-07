@@ -78,13 +78,15 @@ var animate = function() {
 		}					
 		
 		orientation = Math.PI/2 - angle;					
-		var separation = magnitude(y1-y2, x1-x2);
-		deltaX = separation*Math.cos(angle-rotation);
-		deltaY = separation*Math.sin(angle-rotation);
+		var separation = magnitude(y1-y2, x1-x2);		
 		if( deltaY > 0 ) {
+			deltaX = separation*Math.cos(angle-rotation);
+			deltaY = separation*Math.sin(angle-rotation);
 			y2 = y1 - deltaY;
 			x2 = x1 - deltaX;
 		} else {
+			deltaX = separation*Math.cos(angle+rotation);
+			deltaY = separation*Math.sin(angle+rotation);
 			y1 = y1 - deltaY;
 			x1 = x1 - deltaX;
 		}
