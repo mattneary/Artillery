@@ -18,7 +18,7 @@ var conditional = function(str) {
 	return str.substr(1,str.length-2).split(/,\s*?/g).map(condition).join('');
 };
 var parse = function(str) {
-	return 'int leftMotorPower(float leftJoyY, float rightJoyY, float leftJoyX, float rightJoyX) {\n'+(str.match(/^\[[^\]]+\]$/g) ? conditional(str).replace('}\n    if', '} else if').replace('else if(true)', 'else') : (str.indexOf('return') != -1 ? '    '+str+';' : '    return '+str))+'\n}';
+	return 'int leftMotorPower(float leftJoyY, float rightJoyY, float leftJoyX, float rightJoyX) {\n'+(str.match(/^\[[^\]]+\]$/g) ? conditional(str).replace('}\n    if', '} else if').replace('else if(true)', 'else') : (str.indexOf('return') != -1 ? '    '+str : '    return '+str+';'))+'\n}';
 };
 var eval = function(str) {
 	return Function("leftJoyY", "rightJoyY", "leftJoyX", "rightJoyX", str.replace(/^[^{]+{/, '').replace(/}$/, ''));
