@@ -84,10 +84,13 @@ var animate = function() {
 		y2 = y1 - deltaY;
 		x2 = x1 - deltaX;		
 		
-		y1 += shared * Math.sin(orientation) / 100;
-		y2 += shared * Math.sin(orientation) / 100;
-		x1 -= shared * Math.cos(orientation) / 100;
-		x2 -= shared * Math.cos(orientation) / 100;
+		y1 += shared * Math.sin(orientation) / 20;
+		y2 += shared * Math.sin(orientation) / 20;
+		x1 -= shared * Math.cos(orientation) / 20;
+		x2 -= shared * Math.cos(orientation) / 20;
+		
+		angle = Math.atan((y1-y2)/(x1-x2));		
+		orientation = Math.PI/2 - angle;
 	}
 					
 	ctx.beginPath();
