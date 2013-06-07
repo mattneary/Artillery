@@ -121,11 +121,12 @@ var animate = function() {
 	ctx.lineTo(x1, y1);							
 	ctx.stroke();							
 	ctx.closePath();	
+	window.webkitRequestAnimationFrame(animate);
 };
 // Wait for Gamepad
 var poll = function() {
 	if(navigator.webkitGetGamepads()[0]) {
-		setInterval(animate, 200);	
+		window.webkitRequestAnimationFrame(animate);	
 	} else {
 		window.requestAnimationFrame(poll);
 	}
