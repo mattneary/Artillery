@@ -95,8 +95,8 @@ var animate = function() {
 		} else if( rotation > 0 ) {
 			deltaX = separation*Math.cos(angle+rotation);
 			deltaY = separation*Math.sin(angle+rotation);
-			y1 = y2 - deltaY;
-			x1 = x2 - deltaX;		
+			y1 = y2 + deltaY;
+			x1 = x2 + deltaX;		
 		}
 		
 		y1 += shared * Math.sin(orientation);
