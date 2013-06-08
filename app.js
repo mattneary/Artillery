@@ -1,52 +1,6 @@
 var cvs = document.getElementById('cvs'),
 	ctx = cvs.getContext('2d');				
 	
-// Parser		
-var cases = function(str) {
-	return str.match(/\s*?else\s*?/g) ? 'true' : str;
-};
-var condition = function(str) {
-	var parts = str.split('->').map(cases);
-	return '    if('+parts[0]+') {\n        return '+parts[1]+';\n    }\n';
-};
-var conditional = function(str) {
-	return str.substr(1,str.length-2).split(/,\s*?/g).map(condition).join('');
-};
-var parse = function(str) {
-	return 'int leftMotorPower(float leftJoyY, float rightJoyY, float leftJoyX, float rightJoyX) {\n'+(str.match(/^\[[^\]]+\]$/g) ? conditional(str).replace('}\n    if', '} else if').replace('else if(true)', 'else') : (str.indexOf('return') != -1 ? '    '+str : '    return '+str+';'))+'\n}';
-};
-var eval = function(str) {
-	return Function("leftJoyY", "rightJoyY", "leftJoyX", "rightJoyX", str.replace(/^[^{]+{/, '').replace(/}$/, ''));
-};
-var interpret = function(x){return eval(parse(x));};
-
-// User Changeable Power Functions
-var rightPower = function(y1, y2, x1, x2) {
-	return y1;
-};
-var leftPower = function(y1, y2, x1, x2) {
-	return y2;
-};
-
-// User Change Functions
-$("form").on("submit", function(evt) {
-	console.log("test");
-	evt.preventDefault();
-	leftPower = interpret($("#left").val());
-	rightPower = interpret($("#right").val());
-	x1 = 225, y1 = 250,
-	x2 = 275, y2 = 250;
-});
-$("#deploy").on("click", function(evt) {	
-	evt.preventDefault();
-	$("pre.left").text(parse($("#left").val()));
-	$("pre.right").text(parse($("#right").val()));
-	leftPower = interpret($("#left").val());
-	rightPower = interpret($("#right").val());
-	x1 = 225, y1 = 250,
-	x2 = 275, y2 = 250;
-});
-	
 // Helper functions	
 var magnitude = function(a,b){return Math.sqrt(a*a + b*b)};
 
@@ -168,12 +122,60 @@ var Controller = function() {
 	this.y2 = pad.axes[3];
 	this.update = function() {
 		pad = navigator.webkitGetGamepads()[0];
-		this.x1 = pad.axes[0] * 5;
-		this.y1 = pad.axes[1] * 5;
-		this.x2 = pad.axes[2] * 5;
-		this.y2 = pad.axes[3] * 5;
+		this.x1 = pad.axes[0] * 2;
+		this.y1 = pad.axes[1] * 2;
+		this.x2 = pad.axes[2] * 2;
+		this.y2 = pad.axes[3] * 2;
 	};
+};	
+	
+// Parser		
+var parse = function(str) {
+	var cases = function(str) {
+		return str.match(/\s*?else\s*?/g) ? 'true' : str;
+	};
+	var condition = function(str) {
+		var parts = str.split('->').map(cases);
+		return '    if('+parts[0]+') {\n        return '+parts[1]+';\n    }\n';
+	};
+	var conditional = function(str) {
+		return str.substr(1,str.length-2).split(/,\s*?/g).map(condition).join('');
+	};
+	return 'int leftMotorPower(float leftJoyY, float rightJoyY, float leftJoyX, float rightJoyX) {\n'+(str.match(/^\[[^\]]+\]$/g) ? conditional(str).replace('}\n    if', '} else if').replace('else if(true)', 'else') : (str.indexOf('return') != -1 ? '    '+str : '    return '+str+';'))+'\n}';
 };
+var eval = function(str) {
+	return Function("leftJoyY", "rightJoyY", "leftJoyX", "rightJoyX", str.replace(/^[^{]+{/, '').replace(/}$/, ''));
+};
+var interpret = function(x){
+	return eval(parse(x));
+};
+
+// User Changeable Power Functions
+var rightPower = function(y1, y2, x1, x2) {
+	return y1;
+};
+var leftPower = function(y1, y2, x1, x2) {
+	return y2;
+};
+
+// Listen for User Code Submission
+$("form").on("submit", function(evt) {
+	console.log("test");
+	evt.preventDefault();
+	leftPower = interpret($("#left").val());
+	rightPower = interpret($("#right").val());
+	x1 = 225, y1 = 250,
+	x2 = 275, y2 = 250;
+});
+$("#deploy").on("click", function(evt) {	
+	evt.preventDefault();
+	$("pre.left").text(parse($("#left").val()));
+	$("pre.right").text(parse($("#right").val()));
+	leftPower = interpret($("#left").val());
+	rightPower = interpret($("#right").val());
+	x1 = 225, y1 = 250,
+	x2 = 275, y2 = 250;
+});
 
 // Wait for Gamepad
 var tank, controller;
