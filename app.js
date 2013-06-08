@@ -101,6 +101,13 @@ var Tank = function(controller, cvs) {
 		// ... then use it to recalculate orientation.
 		orientation = Math.PI/2 - angle;
 		
+		if( (this.wheels[0].y > cvs.height-10 || this.wheels[0].y < 10) ||
+			(this.wheels[1].y > cvs.height-10 || this.wheels[1].y < 10) ||
+			(this.wheels[2].y > cvs.width-10 || this.wheels[2].x < 10) ||
+			(this.wheels[3].y > cvs.width-10 || this.wheels[3].x < 10) ) {
+				orientation *= -1;	
+		}
+		
 		// Adjust back wheels to reflect changed orientation
 		var backShift = Math.sin(orientation) * 50,
 			sideShift = Math.cos(orientation) * 50;
