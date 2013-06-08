@@ -3,6 +3,8 @@ var cvs = document.getElementById('cvs'),
 	
 // Helper functions	
 var magnitude = function(a,b){return Math.sqrt(a*a + b*b)};
+
+// Load the tank image
 var tankImg = new Image();
 tankImg.src = './small.png';
 
@@ -22,13 +24,12 @@ var Tank = function(controller, cvs) {
 	this.orientation = Math.PI/2;
 	this.render = function() {
 		cvs.width = cvs.width;
-		var a = this.wheels[0],
-			b = this.wheels[1],
-			c = this.wheels[2],
-			d = this.wheels[3];
+		var backLeft = this.wheels[2];
 	
+		// Render the upside-down image as pointing opposite the orientation...
+		// ... positioned at the back left wheel.
 		ctx.save();
-		ctx.translate(c.x, c.y);  
+		ctx.translate(backLeft.x, backLeft.y);  
 		ctx.rotate(Math.PI/2 - this.orientation + Math.PI); 
 		ctx.drawImage(tankImg, 0, 0);
 		ctx.restore();		
@@ -85,6 +86,7 @@ var Tank = function(controller, cvs) {
 		orientation = Math.PI/2 - angle;		
 		this.orientation = orientation;		
 		
+		// Simulate wrap-around by flipping position at a boundary
 		if( (this.wheels[0].y > cvs.height-10 || this.wheels[0].y < 10) ||
 			(this.wheels[1].y > cvs.height-10 || this.wheels[1].y < 10) ) {
 				this.wheels = this.wheels.map(function(wheel) {
@@ -100,7 +102,8 @@ var Tank = function(controller, cvs) {
 				});
 		}
 		
-		// Adjust back wheels to reflect changed orientation
+		// Adjust back wheels to reflect changed orientation, used in...
+		// ... the rendering of the image.
 		var backShift = Math.sin(orientation) * 50,
 			sideShift = Math.cos(orientation) * 50;
 		this.wheels[2] = new Wheel(this.wheels[0].x-sideShift, this.wheels[0].y+backShift);
