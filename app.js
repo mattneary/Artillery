@@ -104,7 +104,14 @@ var Tank = function(controller, cvs) {
 		if( (this.wheels[0].y > cvs.height-10 || this.wheels[0].y < 10) ||
 			(this.wheels[1].y > cvs.height-10 || this.wheels[1].y < 10) ) {
 				this.wheels = this.wheels.map(function(wheel) {
-					wheel.y = cvs.width - wheel.y;
+					wheel.y = cvs.height - wheel.y;
+					return wheel;
+				});
+		}
+		if( (this.wheels[0].x > cvs.width-10 || this.wheels[0].x < 10) ||
+			(this.wheels[1].x > cvs.width-10 || this.wheels[1].x < 10) ) {
+				this.wheels = this.wheels.map(function(wheel) {
+					wheel.x = cvs.width - wheel.y;
 					return wheel;
 				});
 		}
