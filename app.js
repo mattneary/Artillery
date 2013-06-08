@@ -3,6 +3,8 @@ var cvs = document.getElementById('cvs'),
 	
 // Helper functions	
 var magnitude = function(a,b){return Math.sqrt(a*a + b*b)};
+var tankImg = new Image();
+tankImg.src = './small.png';
 
 // Classes
 var Wheel = function(x, y) {
@@ -17,6 +19,7 @@ var Tank = function(controller, cvs) {
 		new Wheel(225, 300), 
 		new Wheel(275, 300)
 	];
+	this.orientation = Math.PI/2;
 	this.render = function() {
 		cvs.width = cvs.width;
 		var a = this.wheels[0],
@@ -24,31 +27,11 @@ var Tank = function(controller, cvs) {
 			c = this.wheels[2],
 			d = this.wheels[3];
 	
-		// Leading wheels		
-		ctx.beginPath();
-			ctx.arc(b.x, b.y, 10, 0, Math.PI*2);
-			ctx.arc(a.x, a.y, 10, 0, Math.PI*2);
-			ctx.fillStyle = '#f00';
-			ctx.fill();	
-		ctx.closePath();
-		
-		// Back wheels
-		ctx.beginPath();			
-			ctx.arc(d.x, d.y, 10, 0, Math.PI*2);
-			ctx.arc(c.x, c.y, 10, 0, Math.PI*2);
-			ctx.fillStyle = '#000';
-			ctx.fill();	
-		ctx.closePath();
-		
-		// Frame
-		ctx.beginPath();
-			ctx.moveTo(a.x, a.y);	
-			ctx.lineTo(b.x, b.y);
-			ctx.lineTo(c.x, c.y);	
-			ctx.lineTo(d.x, d.y);	
-			ctx.lineTo(a.x, a.y);							
-			ctx.stroke();							
-		ctx.closePath();
+		ctx.save();
+		ctx.translate(c.x, c.y);  
+		ctx.rotate(Math.PI/2 - this.orientation + Math.PI); 
+		ctx.drawImage(tankImg, 0, 0);
+		ctx.restore();		
 	};
 	this.animate = function() {
 		// Establish two side speeds based on user power functions.
@@ -99,7 +82,8 @@ var Tank = function(controller, cvs) {
 			angle = Math.PI + angle;
 		}	
 		// ... then use it to recalculate orientation.
-		orientation = Math.PI/2 - angle;
+		orientation = Math.PI/2 - angle;		
+		this.orientation = orientation;		
 		
 		if( (this.wheels[0].y > cvs.height-10 || this.wheels[0].y < 10) ||
 			(this.wheels[1].y > cvs.height-10 || this.wheels[1].y < 10) ) {
@@ -120,7 +104,7 @@ var Tank = function(controller, cvs) {
 		var backShift = Math.sin(orientation) * 50,
 			sideShift = Math.cos(orientation) * 50;
 		this.wheels[2] = new Wheel(this.wheels[0].x-sideShift, this.wheels[0].y+backShift);
-		this.wheels[3] = new Wheel(this.wheels[1].x-sideShift, this.wheels[1].y+backShift);
+		this.wheels[3] = new Wheel(this.wheels[1].x-sideShift, this.wheels[1].y+backShift);				
 		
 		// Render self in canvas
 		this.render();
