@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=640" />
+
+    <link rel="stylesheet" href="stylesheets/core.css" media="screen"/>
+    <link rel="stylesheet" href="stylesheets/mobile.css" media="handheld, only screen and (max-device-width:640px)"/>
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css"/>
+
+    <script type="text/javascript" src="javascripts/modernizr.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="javascripts/headsmart.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $('#main_content').headsmart()
+      })
+    </script>
+    <title>Artillery by mattneary</title>
+  </head>
+
+  <body>
+    <a id="forkme_banner" href="https://github.com/mattneary/Artillery">View on GitHub</a>
+    <div class="shell">
+
+      <header>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <h1>Artillery</h1>
+            <h2>A programmable, controllable tank simulation.</h2>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+      </header>
+
+      <section id="downloads">
+        <span class="inner">
+          <a href="https://github.com/mattneary/Artillery/zipball/master" class="zip"><em>download</em> .ZIP</a><a href="https://github.com/mattneary/Artillery/tarball/master" class="tgz"><em>download</em> .TGZ</a>
+        </span>
+      </section>
+
+
+      <span class="banner-fix"></span>
+
+
+      <section id="main_content">
+        <h1>
+<a name="tanksimulator" class="anchor" href="#tanksimulator"><span class="octicon octicon-link"></span></a>TankSimulator</h1>
+
+<p>This <a href="http://tank.bwhs.me">site</a> was made to simulate a tank robot responsive to a game controller. The site was then built into the workflow of a Robotics Institute for kids. Along with the simulation was provided a programming pane in which the logic of the joystick response could be provided.</p>
+
+<p><img src="http://mattneary.com/images/artillery.png" alt="Artillery"></p>
+
+<h2>
+<a name="custom-language" class="anchor" href="#custom-language"><span class="octicon octicon-link"></span></a>Custom Language</h2>
+
+<p>The language in which the joystick logic could be written was constructed to be as simple as possible for beginners. Essentially, it just consists of conditional branching and arithmetic.</p>
+
+<div class="highlight"><pre><span class="p">[</span><span class="nx">leftJoyX</span><span class="o">&gt;</span><span class="mi">0</span><span class="o">-&gt;</span><span class="nx">leftJoyY</span><span class="o">+</span><span class="nx">leftJoyX</span><span class="p">,</span><span class="k">else</span><span class="o">-&gt;</span><span class="nx">leftJoyY</span><span class="p">]</span>
+<span class="p">[</span><span class="nx">leftJoyX</span><span class="o">&gt;</span><span class="mi">0</span><span class="o">-&gt;</span><span class="nx">leftJoyY</span><span class="p">,</span><span class="k">else</span><span class="o">-&gt;</span><span class="nx">leftJoyY</span><span class="o">-</span><span class="nx">leftJoyX</span><span class="p">]</span>
+</pre></div>
+
+<p>This chosen syntax was inspired by <a href="http://en.wikipedia.org/wiki/John_McCarthy_(computer_scientist">John McCarthy</a>'s paper <a href="http://www-formal.stanford.edu/jmc/recursive/node3.html">Recursive Functions on Symbolic Expressions</a>. From this syntax for conditions as well as a couple primitive functions he axiomatized the Lisp language to the point of a bootstrapped interpreter.</p>
+      </section>
+
+      <footer>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <p>this project by <a href="https://github.com/mattneary">mattneary</a> can be found on <a href="https://github.com/mattneary/Artillery">GitHub</a></p>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+        <p>Generated with <a href="http://pages.github.com">GitHub Pages</a> using Merlot</p>
+        <span class="octocat"></span>
+      </footer>
+
+    </div>
+
+    
+  </body>
+</html>
